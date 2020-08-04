@@ -108,7 +108,7 @@ func (vs *Server) GetAttestationData(ctx context.Context, req *ethpb.Attestation
 	epochStartSlot := helpers.StartSlot(targetEpoch)
 	targetRoot := make([]byte, 32)
 	if epochStartSlot == headState.Slot() {
-		targetRoot = headRoot[:]
+		targetRoot = headRoot
 	} else {
 		targetRoot, err = helpers.BlockRootAtSlot(headState, epochStartSlot)
 		if err != nil {
@@ -122,7 +122,7 @@ func (vs *Server) GetAttestationData(ctx context.Context, req *ethpb.Attestation
 	res = &ethpb.AttestationData{
 		Slot:            req.Slot,
 		CommitteeIndex:  req.CommitteeIndex,
-		BeaconBlockRoot: headRoot[:],
+		BeaconBlockRoot: headRoot,
 		Source:          headState.CurrentJustifiedCheckpoint(),
 		Target: &ethpb.Checkpoint{
 			Epoch: targetEpoch,

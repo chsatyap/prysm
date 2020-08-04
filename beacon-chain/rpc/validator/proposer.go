@@ -92,7 +92,7 @@ func (vs *Server) GetBlock(ctx context.Context, req *ethpb.BlockRequest) (*ethpb
 
 	blk := &ethpb.BeaconBlock{
 		Slot:          req.Slot,
-		ParentRoot:    parentRoot[:],
+		ParentRoot:    parentRoot,
 		StateRoot:     stateRoot,
 		ProposerIndex: idx,
 		Body: &ethpb.BeaconBlockBody{
